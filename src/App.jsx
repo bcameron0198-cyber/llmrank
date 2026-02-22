@@ -417,12 +417,6 @@ async function callClaude(url) {
   if (!res.ok) throw new Error(`API error ${res.status}`);
   return await res.json();
 }
-Include 5-6 topContent and exactly 4 recommendations. Vary scores realistically.`;
-
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type":"application/json", "anthropic-version":"2023-06-01", "x-api-key": ANTHROPIC_API_KEY },
-    body: JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:2000, messages:[{role:"user",content:prompt}] })
   });
   if (!res.ok) throw new Error(`API error ${res.status}`);
   const d = await res.json();
