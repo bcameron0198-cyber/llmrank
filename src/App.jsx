@@ -187,9 +187,8 @@ async function callClaude(url) {
   });
   if (!res.ok) throw new Error(`API error ${res.status}`);
   const d = await res.json();
-  const text = d.content?.[0]?.text;
-  if (!text) throw new Error("Empty response");
-  return JSON.parse(text.replace(/^```json\s*/i,"").replace(/^```\s*/i,"").replace(/\s*```$/i,"").trim());
+  if (!d || typeof d !== "object") throw new Error("Empty response");
+  return d;
 }
 
 const HISTORY_KEY = "llmrank_history";
