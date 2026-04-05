@@ -50,7 +50,7 @@ Include 5-6 topContent items and exactly 4 recommendations. Vary scores realisti
         "x-api-key": process.env.ANTHROPIC_API_KEY,
       },
       body: JSON.stringify({
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-opus-4-5",
         max_tokens: 2000,
         messages: [{ role: "user", content: prompt }],
       }),
