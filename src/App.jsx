@@ -414,10 +414,8 @@ async function callClaude(url) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url: clean })
   });
-  if (!res.ok) throw new Error(`API error ${res.status}`);
-  return await res.json();
-}
-  });
+if (!res.ok) throw new Error(`API error ${res.status}`);
+  const d = await res.json();
   if (!res.ok) throw new Error(`API error ${res.status}`);
   const d = await res.json();
   const text = d.content?.[0]?.text;
