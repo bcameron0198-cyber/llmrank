@@ -24,7 +24,7 @@ Fill in real values based on your knowledge of ${url}. Keep the exact same JSON 
         "x-api-key": process.env.ANTHROPIC_API_KEY,
       },
       body: JSON.stringify({
-        model: "claude-opus-4-5",
+        model: "claude-sonnet-4-6",
         max_tokens: 2000,
         messages: [{ role: "user", content: prompt }],
       }),
