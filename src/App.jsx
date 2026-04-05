@@ -462,6 +462,28 @@ export default function App() {
             <ScoreCard label="ChatGPT" value={data.scores?.chatgpt||0} color="green" delay={200}/>
             <ScoreCard label="Gemini" value={data.scores?.gemini||0} color="blue" delay={300}/>
           </div>
+          {competitors.length>0&&(
+  <>
+    <div className="section-label" style={{marginTop:8}}>// Competitor Leaderboard</div>
+    <div className="panel full-width" style={{marginBottom:18}}>
+      <div className="panel-title">Head-to-Head Comparison</div>
+      <div className="panel-sub">How you stack up against competitors</div>
+      <div className="lb-header"><div>#</div><div>Domain</div><div style={{textAlign:"center"}}>Score</div><div style={{textAlign:"center"}}>Claude</div><div style={{textAlign:"center"}}>ChatGPT</div><div style={{textAlign:"center"}}>Gemini</div></div>
+      <div style={{display:"flex",flexDirection:"column",gap:8,marginTop:8}}>
+        {[{url,isYou:true,score:data.overallScore,scores:data.scores},...competitors.map(c=>({url:c.url,isYou:false,score:c.data?.overallScore??null,scores:c.data?.scores??null,status:c.status}))].sort((a,b)=>(b.score??-1)-(a.score??-1)).map((entry,i)=>(
+          <div key={entry.url} className={`lb-row ${entry.isYou?"you":""}`}>
+            <div className={`lb-rank ${i===0?"top":""}`}>{i+1}</div>
+            <div><div className="lb-domain">{entry.url.replace(/^https?:\/\//,"").replace(/\/$/,"")}{entry.isYou&&<span className="you-badge">YOU</span>}</div></div>
+            <div className="lb-score" style={{color:entry.isYou?"var(--accent)":"var(--text)"}}>{entry.score??"-"}</div>
+            <div className="lb-score" style={{color:"#CC8B3C",fontSize:12}}>{entry.scores?.claude??"—"}</div>
+            <div className="lb-score" style={{color:"#10A37F",fontSize:12}}>{entry.scores?.chatgpt??"—"}</div>
+            <div className="lb-score" style={{color:"#4285F4",fontSize:12}}>{entry.scores?.gemini??"—"}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </>
+)}
           <div className="main-grid">
             <div className="panel">
               <div className="panel-title">Your Content Performance</div>
